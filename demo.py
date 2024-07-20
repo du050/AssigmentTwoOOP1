@@ -1,6 +1,7 @@
-print("       Rental System        ")
-print("----------------------------")
+print("       Rental System Menu       ")
+print("-------------------------------------")
 print("Car Options: Compact/Sedan/SUV/Luxury")
+print("-------------------------------------")
 # Rental rates per day (base rate)
 vehicle_rates = {
     "Compact": 25,
@@ -17,11 +18,13 @@ duration_discounts = {
     8: 0.20   # 8 or more days: 20% discount
 }
 
-print("Options: (1) GPS Navigation: $5",
-    "(2) Mobile Wi-Fi: $8",
-    "(3) Child Seat: $2",
-    "(4) Toll Pass: $4.5",
-    "(5) Roadside Assistance Plus: $5")
+print('''Options: 
+    (1) GPS Navigation: $5,
+    (2) Mobile Wi-Fi: $8,
+    (3) Child Seat: $2,
+    (4) Toll Pass: $4.5,
+    (5) Roadside Assistance Plus: $5''')
+print()
 # Additional features and their daily rates
 additional_features = {
     "1": 5,
@@ -30,7 +33,8 @@ additional_features = {
     "4": 4.50,
     "5": 5
 }
-
+print("Insert your information below:")
+print()
 vehicle_type = input("Enter vehicle type (Compact, Sedan, SUV, Luxury): ")
 print()
 rental_duration = int(input("Enter rental duration in days: "))
