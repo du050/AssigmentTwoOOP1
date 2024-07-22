@@ -1,7 +1,7 @@
 #Assignment 2: Best Cars Inc. Rental System Part 1 & 2
 #Group 8: Grace Zilun, Maria Xavier, Armaandeep Singh
 
-#Initiate constants
+# Initiate constants
 GST = 0.05
 DURATION_2DAY = 2
 DURATION_4DAY = 4
@@ -11,7 +11,7 @@ DISC_4PERCENT = 0.04
 DISC_10PERCENT = 0.1
 DISC_20PERCENT = 0.2
 
-#Define dictionary of vehicle types and base rate
+# Define dictionary of vehicle types and base rate
 VEHICLE_RENTAL_RATES = {
     1: ("Compact", 25.0),
     2: ("Sedan", 35.0),
@@ -19,7 +19,7 @@ VEHICLE_RENTAL_RATES = {
     4: ("Luxury", 60.0)
 }
 
-#Define dictionary of feature options and rate
+# Define dictionary of feature options and rate
 ADDITIONAL_FEATURES = {
     1: ("GPS Navigation", 5.00),
     2: ("Mobile Wi-Fi", 8.00),
@@ -28,7 +28,7 @@ ADDITIONAL_FEATURES = {
     5: ("Roadside Assistance Plus", 5.00)
 }
 
-#Initiate global variables 
+# Initiate global variables 
 rent_another = "Y"
 total_vehicles_rented = 0
 amount_due_before_GST = 0
@@ -43,19 +43,20 @@ while rent_another.upper() == "Y":
 
     # Step 1. Choose the type of vehcile
     print("\nStep 1. Choose the type of vehicle you wish to rent.")
-
+    
+    # Printing the vehicle table
     print(f'{'Vehicle Type': <16} {'Daily Rate': >10}')
     for index, (vehicle_type, vehicle_rate) in VEHICLE_RENTAL_RATES.items():
         print(f' {index}. {vehicle_type: <16}{vehicle_rate: >7}')
 
     selection = int(input("Your selection: "))
-
+    # Error handling 
     while selection not in VEHICLE_RENTAL_RATES:
         print("Error: Invalid selection. Please enter a number between 1 and 4.")
         selection = int(input("Your selection: "))
         
     vehicle_type, vehicle_rate = VEHICLE_RENTAL_RATES[selection]
-    print(f'You have chosen a {vehicle_type}. The base rental rate is {vehicle_rate} per day')
+    print(f'You have chosen a {vehicle_type}. The base rental rate is ${vehicle_rate} per day')
 
     # Step 2. Ask user to input the number of days and conduct base price with discount
     print("\nStep 2. Specify the duration of this vehicle rental.")
@@ -65,7 +66,7 @@ while rent_another.upper() == "Y":
     while rental_days <= 0:
         print("Error: Value cannot be less than 1.")
         rental_days = int(input("Enter the number of days needed: "))
-
+    # Setting the discount
     if rental_days >= DURATION_8DAY:
         discount = DISC_20PERCENT
     elif rental_days >= DURATION_4DAY:
@@ -83,6 +84,7 @@ while rent_another.upper() == "Y":
     # Step 3. Let user add multiple features, when user input "0", produce the summary of rental
     print("\nStep 3. Choose your desired additional features or services.")
 
+    # Printing the features table
     print(f'{"Option":<25}{"Daily Rate":>12}')
     for index, (feature, feature_rate) in ADDITIONAL_FEATURES.items():
         print(f' {index}. {feature:<25}{feature_rate:>8.2f}')
@@ -96,13 +98,13 @@ while rent_another.upper() == "Y":
         
         if option == 0:
             break
-
+        # Error handling 
         if option not in ADDITIONAL_FEATURES:
             print("Error: Invalid selection. Please enter number between 1 and 5.")
             continue
         else:
             feature, feature_rate = ADDITIONAL_FEATURES[option]
-
+        # Error handling 
         if feature in selected_features:
             print("Error: You've selected this feature. Please enter agian. ")
             continue
@@ -111,7 +113,7 @@ while rent_another.upper() == "Y":
             total_feature_price += feature_rate
 
         print(f'Feature: {feature} added for {feature_rate:.2f} per day.')
-
+        # Print checked features table 
         print(f'{"Option":<25}{"Daily Rate":>12}')
         for index, (feature, feature_rate) in ADDITIONAL_FEATURES.items():
             if feature in selected_features:
@@ -119,14 +121,14 @@ while rent_another.upper() == "Y":
             else:
                 print(f' {index}. {feature:<25}{feature_rate:>8.2f}')
 
-    #When user enter '0', break the while loop, calculate the total price and display the summary. Prompt user for the next rent.
+    # When user enter '0', break the while loop, calculate the total price and display the summary. Prompt user for the next rent.
     total_price_per_day = base_rental_per_day + total_feature_price 
 
     total_price = total_price_per_day * rental_days
 
     amount_due_before_GST += total_price
     
-    print(f'\nSuccess! Your reservation for a {rental_days} day {vehicle_type} rental is complete. The price (not including GST) is ${total_price_per_day:.2f} per day or ${total_price:.2f} for the rental')
+    print(f'\nSuccess! Your reservation for a {rental_days} day {vehicle_type} rental is complete.\n The price (not including GST) is ${total_price_per_day:.2f} per day or ${total_price:.2f} for the rental.')
 
     rent_another = input("Do you want to rent another vehicle? (Y/N): ").upper()
 
